@@ -1,4 +1,6 @@
 import os
+os.add_dll_directory(r'C:\ffmpeg-9.0.2-full_build-shared\bin')
+
 import time
 
 import psutil

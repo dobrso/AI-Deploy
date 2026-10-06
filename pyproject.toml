@@ -1,37 +1,10 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "ai-deploy"
 version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
-authors = [
-    { name = "dbrs", email = "ainurakhmedshin@gmail.com" }
-]
-requires-python = ">=3.13"
-dependencies = [
-    "datasets==3.5.1",
-    "dotenv>=0.9.9",
-    "fastapi[standard]>=0.141.1",
-    "jiwer>=4.0.0",
-    "kagglehub>=1.0.2",
-    "librosa>=1.0.0",
-    "opencv-python>=5.0.0.93",
-    "pillow>=12.3.0",
-    "protobuf>=7.36.2",
-    "psutil>=7.2.2",
-    "pytest>=9.1.1",
-    "pytorchvideo>=0.1.5",
-    "sentencepiece>=0.2.2",
-    "tiktoken>=0.14.0",
-    "torch>=2.14.1",
-    "torchaudio>=2.11.0",
-    "torchcodec>=0.17.0",
-    "torchvision>=0.29.1",
-    "transformers>=5.17.0",
-]
 
-[project.scripts]
-ai-deploy = "ai_deploy:main"
-
-[build-system]
-requires = ["uv_build>=0.12.17,<0.13.0"]
-build-backend = "uv_build"
+[tool.setuptools.packages.find]
+where = ["src"]

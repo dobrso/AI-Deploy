@@ -1,28 +1,19 @@
-import json
 import os
+import json
 import time
 import tempfile
 
 import psutil
 import torch
 import torch.nn.functional as F
-import numpy as np
-import datasets
-datasets.config.TORCHVISION_AVAILABLE = False
-
 from torchvision.transforms import Compose, Lambda
 from torchvision.transforms._transforms_video import CenterCropVideo, NormalizeVideo
-
+from pytorchvideo.transforms import ApplyTransformToKey,ShortSideScale,UniformTemporalSubsample
 from pytorchvideo.data.encoded_video import EncodedVideo
-from pytorchvideo.transforms import (
-    ApplyTransformToKey,
-    ShortSideScale,
-    UniformTemporalSubsample,
-)
 from datasets import load_dataset, Video
 
-from ai_deploy.models.video_model import init_video_model
 from utils.settings import MEMORY_CONVERSION, DEVICE
+from ai_deploy.models.video_model import init_video_model
 
 process = psutil.Process(os.getpid())
 memory_start = process.memory_info().rss / MEMORY_CONVERSION

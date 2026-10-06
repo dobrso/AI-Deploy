@@ -19,15 +19,10 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          version: latest
-
       - name: Install Dependencies
         run: |
-          uv sync
+          pip install -r requirements.txt
 
       - name: Run Tests
         run: |
-          uv run pytest
+          pytest
