@@ -10,6 +10,7 @@ from content_based import ContentBasedRec
 from user_based import UserBasedRec
 from item_based import ItemBasedRec
 from popularity_based import PopularityBasedRec
+from two_tower import TwoTowerRec
 
 def load_spotify_dataset(sample_n=None, seed=42):
     dataset_name = 'maharshipandya/-spotify-tracks-dataset'
@@ -121,6 +122,10 @@ def main():
     pbr = PopularityBasedRec(df)
     print(f'PopularityBased построен за {time.time() - t0:.2f} с')
 
+    t0 = time.time()
+    ttr = TwoTowerRec(df, train_likes, dim=64, epochs=10, temp=0.05)
+    print(f'TwoTower построен за {time.time() - t0:.2f} с')
+
     results = {}
 
     results['ContentBased'] = evaluate_recommender(
@@ -137,6 +142,10 @@ def main():
 
     results['PopularityBased'] = evaluate_recommender(
         lambda u, t, k: pbr.recommend(u, t, k), train_likes, test_likes, K
+    )
+
+    results['TwoTower'] = evaluate_recommender(
+        lambda u, t, k: ttr.recommend(u, t, k), train_likes, test_likes, K
     )
 
     print('=' * 60)
